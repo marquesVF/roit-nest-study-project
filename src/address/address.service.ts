@@ -6,32 +6,19 @@ import { ViacepDto } from './viacep.dto';
 
 @Injectable()
 export class AddressService {
+
     constructor(
         private addressRespository: InMemoryDBService<Address>,
         private httpService: HttpService
     ) {}
 
-    private consumeAddressApi(cep: string) {
-        return this
-            .httpService
-            .getRequest<ViacepDto>(`http://viacep.com.br/ws/${cep}/json`)
-    }
-
-    private async searchAddress(cep: string) {
-        const viacepDto = await this.consumeAddressApi(cep)
-
-        return {
-            cep,
-            street: viacepDto.logradouro,
-            neighborhood: viacepDto.bairro,
-            city: viacepDto.localidade,
-            state: viacepDto.uf
-        }
-    }
-
     async create(cep: string) {
-        const address = await this.searchAddress(cep)
+        const address = await this.httpService.getRequest<ViacepDto>(
+            `http://viacep.com.br/ws/${cep}/json`,
+            ViacepDto
+        )
 
         return this.addressRespository.create(address)
     }
+
 }

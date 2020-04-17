@@ -1,9 +1,19 @@
+import { JsonProperty } from "@roit/roit-model-mapper"
+
 export class ViacepDto {
-    cep: string
-    logradouro: string
-    complemento: string
-    bairro: string
-    localidade: string
-    uf: string
-    unidade: string
+
+    cep: string = undefined
+
+    @JsonProperty('logradouro')
+    street: string = undefined
+
+    @JsonProperty('bairro')
+    neighborhood: string = undefined
+
+    @JsonProperty('localidade')
+    city: string = undefined
+
+    @JsonProperty('uf')
+    state: string = undefined
+
 }

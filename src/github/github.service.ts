@@ -7,22 +7,26 @@ import { GithubUserDto } from './github-user.dto';
 
 @Injectable()
 export class GithubService {
+
     constructor(
         private githubRespository: InMemoryDBService<GithubAccount>,
         private httpService: HttpService
     ) {}
 
-    private consumeGithubApi<T>(url: string) {
+    private consumeGithubApi<T>(url: string, clazz: new () => T) {
         return this
             .httpService
             .getRequest<T>(
-                `https://api.github.com/${url}`
+                `https://api.github.com/${url}`,
+                clazz
             )
     }
 
     private async getGithubUserInformation(user: string) {
-        const githubSearchDto = await this
-            .consumeGithubApi<GithubSearchDto>(`search/users?q=${user}`)
+        const githubSearchDto = await this.consumeGithubApi<GithubSearchDto>(
+            `search/users?q=${user}`,
+            GithubSearchDto
+        )
 
         if (githubSearchDto.items.length > 1) {
             throw Error(`More than one github user found with login ${user}`)
@@ -32,7 +36,8 @@ export class GithubService {
         }
 
         return this.consumeGithubApi<GithubUserDto>(
-            `users/${githubSearchDto.items[0].login}`
+            `users/${githubSearchDto.items[0].login}`,
+            GithubUserDto
         )
     }
 
@@ -41,4 +46,5 @@ export class GithubService {
 
         return this.githubRespository.create(githubAccount)
     }
+
 }
