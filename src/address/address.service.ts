@@ -11,18 +11,26 @@ export class AddressService {
         private httpService: HttpService
     ) {}
 
-    async create(cep: string) {
-        const viaCepResponse = await this
+    private consumeAddressApi(cep: string) {
+        return this
             .httpService
             .getRequest<ViacepDto>(`http://viacep.com.br/ws/${cep}/json`)
+    }
 
-        const address: Partial<Address> = {
+    private async searchAddress(cep: string) {
+        const viacepDto = await this.consumeAddressApi(cep)
+
+        return {
             cep,
-            street: viaCepResponse.logradouro,
-            neighborhood: viaCepResponse.bairro,
-            city: viaCepResponse.localidade,
-            state: viaCepResponse.uf
+            street: viacepDto.logradouro,
+            neighborhood: viacepDto.bairro,
+            city: viacepDto.localidade,
+            state: viacepDto.uf
         }
+    }
+
+    async create(cep: string) {
+        const address = await this.searchAddress(cep)
 
         return this.addressRespository.create(address)
     }
