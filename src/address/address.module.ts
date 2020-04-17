@@ -5,7 +5,7 @@ import { HttpModule } from 'src/http/http.module';
 
 @Module({
   imports: [
-    InMemoryDBModule.forFeature('person'),
+    InMemoryDBModule.forFeature('address'),
     HttpModule
   ],
   providers: [AddressService],
