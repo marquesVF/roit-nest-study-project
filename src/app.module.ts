@@ -4,9 +4,10 @@ import { AppService } from './app.service';
 import { PersonModule } from './person/person.module';
 import { AddressModule } from './address/address.module';
 import { HttpModule } from './http/http.module';
+import { GithubModule } from './github/github.module';
 
 @Module({
-  imports: [PersonModule, AddressModule, HttpModule],
+  imports: [PersonModule, AddressModule, HttpModule, GithubModule],
   controllers: [AppController],
   providers: [AppService],
 })
