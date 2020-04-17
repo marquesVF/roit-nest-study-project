@@ -20,6 +20,14 @@ module.exports = {
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
-    'no-trailing-spaces': 'error'
+    'no-trailing-spaces': 'error',
+    'padded-blocks': [
+      'error',
+      {
+        'blocks': 'never',
+        'classes': 'always',
+        'switches': 'never'
+      }
+    ]
   },
 };

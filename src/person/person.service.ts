@@ -7,6 +7,7 @@ import { GithubService } from 'src/github/github.service';
 
 @Injectable()
 export class PersonService {
+
     constructor(
         private personRepository: InMemoryDBService<Person>,
         private addressService: AddressService,
@@ -27,4 +28,5 @@ export class PersonService {
             .personRepository
             .create({ ...personDto, address, githubAccount })
     }
+
 }

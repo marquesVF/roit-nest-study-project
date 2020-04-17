@@ -4,6 +4,7 @@ import { PersonService } from './person.service';
 
 @Controller('person')
 export class PersonController {
+
     constructor(private readonly personService: PersonService) {}
 
     @Get()
@@ -15,4 +16,5 @@ export class PersonController {
     create(@Body() personDto: PersonDto) {
         return this.personService.create(personDto)
     }
+
 }
