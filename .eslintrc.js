@@ -28,6 +28,7 @@ module.exports = {
         'classes': 'always',
         'switches': 'never'
       }
-    ]
-  },
+    ],
+    'eol-last': 'error',
+  }
 };
