@@ -627,6 +627,15 @@
     normalize-html-whitespace "^1.0.0"
     reflect-metadata "^0.1.13"
 
+"@roit/roit-response-handler@0.0.10":
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/@roit/roit-response-handler/-/roit-response-handler-0.0.10.tgz#8ea783f9fcface2bf49a8e5807d49fce50b829d8"
+  integrity sha512-Q7E13xL0ebEQLpJ82T3Dkt8C/a+quiiwmKErE3f1hn3JjLnThqmdSp65h1B8LrRUfnd0KxWtYuOlOa2keTFWBw==
+  dependencies:
+    chalk "^3.0.0"
+    express "^4.17.1"
+    reflect-metadata "^0.1.13"
+
 "@schematics/angular@^8.3.21":
   version "8.3.26"
   resolved "https://registry.yarnpkg.com/@schematics/angular/-/angular-8.3.26.tgz#adda1552de14126e4d0993b648b4ea6258a581ce"
