@@ -4,6 +4,7 @@ import { HttpService } from 'src/http/http.service';
 import { GithubAccount } from './github-account.entity';
 import { GithubSearchDto } from './github-search.dto';
 import { GithubUserDto } from './github-user.dto';
+import BusinessException from 'src/exceptions/business.exception';
 
 @Injectable()
 export class GithubService {
@@ -29,10 +30,11 @@ export class GithubService {
         )
 
         if (githubSearchDto.items.length > 1) {
-            throw Error(`More than one github user found with login ${user}`)
+            throw new BusinessException(
+                `More than one github user found with login ${user}`)
         }
         if (githubSearchDto.items.length === 0) {
-            throw Error(`No github account under login ${user}`)
+            throw new BusinessException(`No github account under login ${user}`)
         }
 
         return this.consumeGithubApi<GithubUserDto>(
